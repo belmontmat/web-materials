@@ -1,7 +1,9 @@
 # ui.R
 library(shiny)
 library(plotly)
-shinyUI(navbarPage(
+library(shinythemes)
+shinyUI(
+  navbarPage(theme = shinytheme("sandstone"),
   "Electoral College",
   # Create a tab panel for your map
   tabPanel(
@@ -12,7 +14,7 @@ shinyUI(navbarPage(
 
       # Side panel for controls
       sidebarPanel(
-
+        tags$h2(class = "panels", "Sidebar"),
         # Input to select variable to map
         selectInput(
           "mapvar",
@@ -27,6 +29,11 @@ shinyUI(navbarPage(
 
       # Main panel: display plotly map
       mainPanel(
+        tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
+        tags$h2(class = "panels", "Main Panel"),
+        tags$p("This map shows the electoral college votes by states. The darker
+               the color, the higher the number of votes. California has 
+                 the highest votes."),
         plotlyOutput("map")
       )
     )
